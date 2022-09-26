@@ -1,0 +1,37 @@
+
+.include 'tsmc180nm.lib'
+.param SUPPLY=1.8
+
+* Netlist
+VDD n1 GND SUPPLY
+M1 Vout Vin GND GND CMOSN W=1u L=180n
+M2 Vout Vin n1 n1 CMOSP W=2u L=180n
+C1 Vout GND 0.1p
+* Pulse: Low/High/Delay/RiseTime/FallTime/PulseWidthPerPhase/TimePeriod
+Vs Vin GND pulse(0 SUPPLY 0 0.5p 0.5p 0.1u 0.2u)
+
+* Analysis
+* Transient Analysis
+.tran 1p 0.5u
+.measure tran
++ risetime trig v(Vout) val=0.1*SUPPLY rise=1 targ v(Vout) val=0.9*SUPPLY rise=1
+.measure tran
++ falltime trig v(Vout) val=0.9*SUPPLY fall=1 targ v(Vout) val=0.1*SUPPLY fall=1
+*risetime            =  1.671295e-10 targ=  1.001981e-07 trig=  1.000310e-07
+*falltime            =  2.049960e-10 targ=  3.756301e-10 trig=  1.706341e-10
+
+.control
+set filetype=ascii
+set appendwrite
+set hcopydevtype=postscript
+set hcopypscolor=1
+set hcopypstxcolor=0
+run
+
+* Transient Analysis
+hardcopy run.ps v(Vout) v(Vin)+2
+
+quit
+.endc 
+
+.end

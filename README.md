@@ -10,9 +10,17 @@
 - 
 - 
 
-# [MOSFET Characteristics](nmos180nm.cir)
+[__MOSFET Characteristics__](nmos180nm.cir)
 
 <img src="nmos180nm.png" height="720">
+
+[__CMOS: Rise/Fall Time__](cmos001.cir)
+
+<img src="cmos001.png" height="720">
+
+[__CMOS: Inverter Chain__](cmos002.cir)
+
+<img src="cmos002.png" height="720">
 
 # Scripts
 

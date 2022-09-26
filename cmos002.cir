@@ -1,0 +1,42 @@
+
+.include 'tsmc180nm.lib'
+.param SUPPLY=1.8
+
+* Inverter
+.subckt INV INPUT OUTPUT GND
+VDD n1 GND SUPPLY
+Mn1 OUTPUT INPUT GND GND CMOSN W=1u L=180n
+Mp1 OUTPUT INPUT n1 n1 CMOSP W=2u L=180n
+.ends
+
+* Netlist
+Vs Vin GND pulse(0 SUPPLY 0 0.5p 0.5p 0.1u 0.2u)
+XINV1 Vin n1 GND INV
+XINV2 n1 n2 GND INV
+XINV3 n2 n3 GND INV
+XINV4 n3 Vout GND INV
+C1 Vout GND 0.1p
+
+* Analysis
+* Transient Analysis
+.tran 1p 0.5u
+.measure tran
++ risetime trig v(Vout) val=0.1*SUPPLY rise=1 targ v(Vout) val=0.9*SUPPLY rise=1
+.measure tran
++ falltime trig v(Vout) val=0.9*SUPPLY fall=1 targ v(Vout) val=0.1*SUPPLY fall=1
+*risetime            =  1.683861e-10 targ=  2.903523e-10 trig=  1.219662e-10
+*falltime            =  2.062484e-10 targ=  1.004750e-07 trig=  1.002688e-07
+
+.control
+set filetype=ascii
+set appendwrite
+set hcopydevtype=postscript
+set hcopypscolor=1
+set hcopypstxcolor=0
+run
+* Transient Analysis
+hardcopy run.ps v(Vout) v(Vin)+2
+quit
+.endc 
+
+.end
