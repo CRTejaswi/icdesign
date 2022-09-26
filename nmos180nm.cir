@@ -1,0 +1,36 @@
+* NMOS: CS Amplifier
+.include 'tsmc180nm.lib'
+
+* Netlist
+VDD 1 GND 1.8
+Rd 1 Vout 10k
+*Vs Vin GND 0.6
+*Vs Vin GND SIN(0.75 50m 10k)
+Vs Vin GND 0.6 ac 1
+M1 Vout Vin GND GND CMOSN W=1u L=180n
+
+* Analysis
+.control
+set filetype=ascii
+set appendwrite
+*op
+save all @M1[Id]
+save all @M1[gm]
+
+* DC Analysis
+*dc Vs 0 1.8 0.1 
+*hardcopy nmos180nm_dc1.ps @M1[Id] @M1[gm]
+*hardcopy nmos180nm_dc2.ps @M1[Id] vs v(Vin) @M1[Id] vs v(Vout) xlabel 'Vgs, Vds (V)' ylabel 'Id (µA)' title 'NMOS180nm: Id vs Vgs,Vds'
+
+* Transient Analysis
+*tran 1u 0.5m 
+*hardcopy nmos180nm_tran.ps v(Vout) v(Vin)
+
+* AC Analysis
+ac dec 100 1 100G
+hardcopy nmos180nm_ac.ps db(Vout) ph(Vout)
+
+quit
+.endc 
+
+.end
