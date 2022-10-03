@@ -1,8 +1,15 @@
     Copyright(c) 2022-
     Author: Chaitanya Tejaswi (github.com/CRTejaswi)    License: GPL v3.0+
 
-# Digital/Analog IC Design
-> Info
+# Digital/Analog IC Design 🚧
+> Everything VLSI - Digital, Analog, Mixed.
+> 
+> Topics: rlc/diode/bjt/jfet/mosfet/mesfet/power-mosfet/modular-spintronics.
+> - Vacuum Tube Topologies??
+> - Bipolar Topologies: DTL/RTL/TTL
+> - Mosfet Topologies: StaticLogic/DynamicLogic/DifferentialLogic, Memory (SRAM/DRAM), Opamps
+> 
+> Tools: ngspice/ltspice, magic, vivado/vivadohls (hls/rtl/physical/timing/power/area), pwsh, py3, c/c++.
 
 # Index
 
@@ -10,17 +17,21 @@
 - 
 - 
 
-[__MOSFET Characteristics__](nmos180nm.cir)
+[__Power Sources__](sources/sources.cir)
 
-<img src="nmos180nm.png" height="720">
+<img src="sources/sources.png" height="720">
 
-[__CMOS: Rise/Fall Time__](cmos001.cir)
+[__MOSFET Characteristics__](mosfet/nmos180nm.cir)
 
-<img src="cmos001.png" height="720">
+<img src="mosfet/nmos180nm.png" height="720">
 
-[__CMOS: Inverter Chain__](cmos002.cir)
+[__CMOS: Rise/Fall Time__](mosfet/cmos001.cir)
 
-<img src="cmos002.png" height="720">
+<img src="mosfet/cmos001.png" height="720">
+
+[__CMOS: Inverter Chain__](mosfet/cmos002.cir)
+
+<img src="mosfet/cmos002.png" height="720">
 
 # Scripts
 

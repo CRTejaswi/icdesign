@@ -1,0 +1,49 @@
+Indpendent Voltage Sources
+
+*Vexample
+
+****************************************
+**VPULSE**
+*PULSE (V1 V2 TD TR TF PulseWidth PER PHASE)
+****************************************
+
+V1 n1 0 PULSE (0 1 0 1n 1n 50n 100n)
+R1 n1 0 1
+
+****************************************
+**SINUSOIDAL**
+*SIN(Voffset VA Freq TD Theta Phase)
+****************************************
+
+V2 n2 0 sin(0 1 10Meg 0 0)
+R2 n2 0 1
+
+****************************************
+**Exponential
+*EXP (V1 V2 TD1 TAU1 TD2 TAU2)
+****************************************
+
+V3 n3 0 exp (0 1 0 10n 50n 10n)
+r3 n3 0 1
+
+****************************************
+**Piece-Wise Linear
+*PWL (T1 V1 <T2 V2 T3 V3 ...>)<r> <td>
+****************************************
+V4 n4 0 PWL(0 -0.5 10n -0.5 11n 1.5 20n 1.5) r=0 td=0
+r4 n4 0 1 
+
+.control
+set filetype=ascii
+set appendwrite
+set hcopydevtype=postscript
+set hcopypscolor=1
+set hcopypstxcolor=0
+set hcopywidth=1280
+set hcopyheight=720
+tran 1n 200n 
+hardcopy sources.ps n1 n2 n3 n4 title 'Voltage Sources'
+quit
+.endc
+
+.end 
